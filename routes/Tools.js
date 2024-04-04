@@ -1,9 +1,7 @@
 var express = require('express');
+const Tools_controllers= require('../controllers/Tools');
 var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('Tools', { title: 'Search Results Tools' });
-});
-
+/* GET Tools */
+router.get('/', Tools_controllers.Tools_view_all_Page );
 module.exports = router;
+
