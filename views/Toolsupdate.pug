@@ -1,6 +1,9 @@
 extends layout
 block content
   h1= title
+  if (toShow == null)
+    h2 No instance to update
+  else
     - let Toolsid = toShow._id
     - let usage = toShow.usage
     - let name = toShow.name
@@ -12,13 +15,13 @@ block content
     form(id='ToolsForm', action= actionid, method="PUT")
       div.form-group
         label.ToolsAttr(for='usage') Tools usage
-        input#usage(type='text', name='usage' )
+        input#usage(type='text', name='usage', class = 'form-control' )
       div.form-group
         label.ToolsAttr(for='name') Tools name
-        input#name(type='text', name='name' )
+        input#name(type='text', name='name' , class = 'form-control')
       div.form-group
         label.ToolsAttr(for='price') price
-        input#price(type='number', name='price' )
+        input#price(type='number', name='price',class = 'form-control' )
       input(type="submit")
     script.
       document.forms['ToolsForm'].addEventListener('submit', (event) => {

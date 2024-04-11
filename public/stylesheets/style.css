@@ -7,8 +7,23 @@ a {
   color: #00B7FF;
 }
 
+form {
+  width: 70%;
+  position: relative;
+  left: 100px;
+}
+
 .ToolsAttr {
-  background-color: aquamarine;
+  background-color: rgb(140, 127, 255);
   width: 120px;
+  display: inline-block;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-weight: bold;
   }
+
+  .btn {
+    margin-top: 5px;
+   }
   
