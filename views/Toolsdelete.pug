@@ -1,0 +1,52 @@
+extends layout
+ 
+block content
+  h1= title
+    - let Toolsid = toShow._id
+    - let usage = toShow.usage
+    - let name = toShow.name
+    - let price = toShow.price
+    - let actionid = "/resource/Tools/" + Toolsid
+ 
+    script.
+      let actionid = "#{actionid}"
+   
+    div
+      div.row
+        div(class='ToolsAttr mr-3') Tools ID is:
+        div #{Toolsid}
+      div.row
+        div(class='ToolsAttr mr-3') Usage is:
+        div #{usage}
+      div.row
+        div(class='ToolsAttr mr-3') name is:
+        div #{name}
+      div.row
+        div(class='ToolstAttr mr-3') price is:
+        div #{price}
+   
+    button(class="btn btn-danger m-2", onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2", onclick="cancel()") Cancel
+ 
+    script.
+      function cancel() {
+        // Go back to the home page for the watercraft collection
+        window.location.href='/Tools'
+      }
+    script.
+      function deleteOnid() {
+        console.log("starting delete")
+        // delete first
+        fetch(actionid, {
+          method: 'DELETE' // Don't need a body for the delete
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Delete succeeded")
+          window.location.href='/Tools'
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Delete failed " + error )
+        });
+      }

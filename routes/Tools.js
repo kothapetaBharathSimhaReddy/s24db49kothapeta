@@ -13,5 +13,6 @@ router.get('/detail', Tools_controllers.Tools_view_one_Page);
 router.get('/create', Tools_controllers.Tools_create_Page);
 /* GET create update page */
 router.get('/update', Tools_controllers.Tools_update_Page);
-
+/* GET delete costume page */
+router.get('/delete', Tools_controllers.Tools_delete_Page);
 module.exports = router;

@@ -153,5 +153,18 @@ exports.Tools_update_Page = async function(req, res) {
     res.send(`{'error': '${err}'}`);
     }
     };
+// Handle a delete one view with id from query
+exports.Tools_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await Tools.findById(req.query.id)
+    res.render('Toolsdelete', { title: 'Tools Delete', toShow:
+    result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
     
     
