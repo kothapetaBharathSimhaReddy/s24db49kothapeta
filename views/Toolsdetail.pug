@@ -1,0 +1,21 @@
+extends layout
+ 
+block content
+  h1= title
+    - let id = toShow._id
+    - let usage = toShow.usage
+    - let name = toShow.name
+    - let price = toShow.price
+    div
+      div.row
+        div(class='ToolsAttr mr-3') Tools ID is:
+          div #{id}
+      div.row
+        div(class='ToolsAttr mr-3') usage is:
+          div #{usage}
+      div.row
+        div(class='ToolsAttr mr-3') name is:
+          div #{name}
+      div.row
+        div(class='ToolsAttr mr-3') price is:
+          div #{price}

@@ -1,0 +1,32 @@
+extends layout
+ 
+block content
+  h1= title
+  form(id='ToolsForm', action="/resource/Tools" , method="POST")
+    div.form-group
+      label.ToolsAttr(for='usage') usage
+      input#usage(type='text', name='usage')
+    div.form-group
+      label.ToolsAttr(for='length') name
+      input#Color(type='text', name='name')
+    div.form-group
+      label.ToolsAttr(for='price') price
+      input#price(type='number', name='price')
+    input(type="submit")
+    script.
+      document.forms['ToolsForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO do something here to show user that form is being submitted
+        fetch(event.target.action, {
+          method: 'POST',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          return resp.text() // or whatever the server sends
+        }).then((body) => {
+          alert("Save succeeded");
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Save failed " + error );
+        });
+      });
