@@ -1,0 +1,39 @@
+extends layout
+block content
+  h1= title
+    - let Toolsid = toShow._id
+    - let usage = toShow.usage
+    - let name = toShow.name
+    - let price = toShow.price
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{Toolsid}
+    - let actionid = "/resource/Tools/" + Toolsid
+    form(id='ToolsForm', action= actionid, method="PUT")
+      div.form-group
+        label.ToolsAttr(for='usage') Tools usage
+        input#usage(type='text', name='usage' )
+      div.form-group
+        label.ToolsAttr(for='name') Tools name
+        input#name(type='text', name='name' )
+      div.form-group
+        label.ToolsAttr(for='price') price
+        input#price(type='number', name='price' )
+      input(type="submit")
+    script.
+      document.forms['ToolsForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO do something here to show user that form is being submitted
+        fetch(event.target.action, {
+          method: 'PUT',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          return resp.text(); //resp.json();or whatever the server sends
+        }).then((body) => {
+          alert("Update succeeded");
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Update failed: " + error);
+        });
+      });
