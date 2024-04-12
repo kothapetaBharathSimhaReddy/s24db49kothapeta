@@ -1,23 +1,33 @@
 extends layout
  
 block content
-  h1= title
+  - let Tools = results
+  div(class="container-fluid")
+    div(class="row m-1")
+      each item in Tools
+        - let destination = `dispatch(\"/Tools/update?id=${item._id}\")`
+        div(class="row-sm-2 m-1") Mineral #{item.usage}(#{item.name}) is #{item.price}
+          button.btn(class="btn-primary ml-1" , onclick= destination) Update
  
-  div.container-fluid
-    div.row
-    let Tools = results
-       
-      each Tools, index in results
-        .col-sm-2
-        div.col-sm-2(onclick=`buy(${index})`)
-       
-          p usage: #{Tools.usage}
-          p name : #{Tools.name}
-          p price: $#{Tools.price.toFixed(2)}
+    script.
+      function dispatch(path){
+        window.location.href=path
+      }
  
-  a(href="/") Back to index
+    .container-fluid
+      .row
+        each item, index in Tools
+          .col-sm-4
+            .instrument(onclick=`buy(${index})`)
+              h3 #{item.usage}
+              p name : #{item.name}
+              p price : #{item.price}
+            .col-sm-2
+              p usage: #{item.usage}
+              p name : #{item.name}
+              p price: #{item.price}
  
-   script.
+  script.
     function buy(index) {
-        alert(`You purchased item ${index}`);
+      alert("You purchased item " + index);
     }
