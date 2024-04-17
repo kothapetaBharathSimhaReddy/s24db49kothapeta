@@ -1,18 +1,18 @@
 var express = require('express');
+var router = express.Router();
+module.exports = router;
+var express = require('express');
 const Tools_controllers= require('../controllers/Tools');
 var router = express.Router();
-/* GET Tools */
-router.get('/', Tools_controllers.Tools_view_all_Page );
-
-// GET request for one Tools.
-router.get('/Tools/:id', Tools_controllers.Tools_detail);
-/* GET detail Tools page */
+const secured = (req, res, next) => {
+ if (req.user){
+ return next();
+ }
+ res.redirect("/login");
+ }
+router.get('/', Tools_controllers.Tools_view_all_Page);
 router.get('/detail', Tools_controllers.Tools_view_one_Page);
-
-/* GET create Tools page */
-router.get('/create', Tools_controllers.Tools_create_Page);
-/* GET create update page */
-router.get('/update', Tools_controllers.Tools_update_Page);
-/* GET delete costume page */
-router.get('/delete', Tools_controllers.Tools_delete_Page);
+router.get('/create',Tools_controllers.Tools_create_Page);
+router.get('/update',secured,Tools_controllers.Tools_update_Page);
+router.get('/delete',Tools_controllers.Tools_delete_Page);
 module.exports = router;
