@@ -2,12 +2,21 @@ extends layout
  
 block content
   - let Tools = results
+  - let destination = `dispatch("/Tools/create")`
+    button.btn(class="btn-primary ml-1", onclick= destination) Create New Tools item
   div(class="container-fluid")
     div(class="row m-1")
       each item in Tools
-        - let destination = `dispatch(\"/Tools/update?id=${item._id}\")`
-        div(class="row-sm-2 m-1") Mineral #{item.usage}(#{item.name}) is #{item.price}
-          button.btn(class="btn-primary ml-1" , onclick= destination) Update
+        - let destination1 = `dispatch(\"/Tools/update?id=${item._id}\")`
+        - let destination2 = `dispatch(\"/Tools/detail?id=${item._id}\")`
+        - let destination3 = `dispatch(\"/Tools/delete?id=${item._id}\")`
+        div(class="row-sm-2 m-1") Tools #{item.usage}(#{item.name}) is #{item.price}
+          div(class="col-sm-2", onclick=`buy(${index})`) #{Tools.usage}
+          div(class="col-sm-2", onclick=`buy(${index})`) #{Tools.name}
+          div(class="col-sm-2", onclick=`buy(${index})`) #{Tools.price}
+          button.btn(class="btn-primary ml-1", onclick= destination1) Update
+          button.btn(class="btn-primary ml-1", onclick=destination2) Detail
+          button.btn(class="btn-primary ml-1", onclick=destination3) Delete
  
     script.
       function dispatch(path){
@@ -17,7 +26,7 @@ block content
     .container-fluid
       .row
         each item, index in Tools
-          .col-sm-4
+          .col-sm-3
             .instrument(onclick=`buy(${index})`)
               h3 #{item.usage}
               p name : #{item.name}

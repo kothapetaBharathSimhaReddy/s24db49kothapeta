@@ -15,28 +15,32 @@ block content
     form(id='ToolsForm', action= actionid, method="PUT")
       div.form-group
         label.ToolsAttr(for='usage') Tools usage
-        input#usage(type='text', name='usage', class = 'form-control' )
+        input#usage(type='text', name='usage', value= usage )
       div.form-group
         label.ToolsAttr(for='name') Tools name
-        input#name(type='text', name='name' , class = 'form-control')
+        input#name(type='text', name='name', value= name )
       div.form-group
         label.ToolsAttr(for='price') price
-        input#price(type='number', name='price',class = 'form-control' )
+        input#price(type='number', name='price', value= price )
       input(type="submit")
     script.
       document.forms['ToolsForm'].addEventListener('submit', (event) => {
         event.preventDefault();
-        // TODO do something here to show user that form is being submitted
         fetch(event.target.action, {
           method: 'PUT',
-          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+          body: new URLSearchParams(new FormData(event.target))
         }).then((resp) => {
+          if(resp.ok){
+            alert ("Tools Updated Successfully")
+            document.getElementById('ToolsForm').reset()
+        }
+        else {
+            alert (" Failed to Update Tools")
+        }
           return resp.text(); //resp.json();or whatever the server sends
         }).then((body) => {
-          alert("Update succeeded");
-          // TODO handle body
+        //  alert("Update succeeded");
         }).catch((error) => {
-          // TODO handle error
           alert("Update failed: " + error);
         });
       });
